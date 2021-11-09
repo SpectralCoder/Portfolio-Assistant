@@ -1,0 +1,190 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Button Modal -->
+    <button data-toggle="modal" data-target="#modal-form-signup" class="btn butloc">Contact me!</button>
+    <!-- Modal Content -->
+    <div class="modal fade" id="modal-form-signup" tabindex="-1" role="dialog" aria-labelledby="modal-form-signup"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="card bg-primary shadow-soft border-light p-4">
+                        <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <div class="text-center">
+                            <img class="mx-auto sizefixicon mb-2" src="{% static 'img/bot.png' %}">
+                        </div>
+                        <div class="card-header text-center pb-0">
+                            <h2 class=" bg-primary shadow-inset border-light p-4 mb-0 h5">Mira- AI Assistant</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="chat-container flex flex-end" id="chat-container"
+                                style="height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                <div class="input-group mb-2 bot-class">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <img class="mx-auto sizefixiconsmall" src="{% static 'img/robot.png' %}">
+                                        </span>
+                                    </div>
+                                    <div class="form-control h-auto">
+                                        Hey ! I am Mira.
+                                    </div>
+                                </div>
+                                <div class="input-group mb-2 bot-class">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <img class="mx-auto sizefixiconsmall" src="{% static 'img/robot.png' %}">
+                                        </span>
+                                    </div>
+                                    <div class="form-control h-auto">
+                                        I am trained to talk about Mujahidul.
+                                    </div>
+                                </div>
+                                <div class="input-group mb-2 bot-class">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <img class="mx-auto sizefixiconsmall" src="{% static 'img/robot.png' %}">
+                                        </span>
+                                    </div>
+                                    <div class="form-control h-auto">
+                                        <span>Thanks for the interest.</span>
+                                        <span> Ask me anything about him.</span>
+                                    </div>
+                                </div>
+                                <!-- <div class="input-group mb-4 bot-class">
+                            <div class="form-control mr-0 h-auto">
+                                Hi! I am Mira. Ask me about Mujahidul.
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <img class="mx-auto sizefixiconsmall" src="{% static 'img/user.png' %}">
+                                </span>
+                            </div>
+                        </div> -->
+                            </div>
+                            <div class="input-group mt-4 mb-4 bot-class">
+                                <input class="form-control h-auto" id="input-place" placeholder="write message...">
+                                </input>
+                                <div class="input-group-prepend">
+                                    <a class="input-group-text btn btn-primary" id="query-submit">
+                                        <i class="far fa-paper-plane mr-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% block javascript %}
+    <script>
+        $("#query-submit").click(function (e) {
+
+            // preventing from page reload and default actions
+
+            e.preventDefault();
+
+            // serialize the data for sending the form data.
+
+            // var serializedData = $(this).serialize();
+
+            // make POST ajax call
+            var userInput = document.querySelector('#input-place').value;
+
+            $("#chat-container").append(
+
+                        ` <div class="input-group mb-4 bot-class">
+                            <div class="form-control mr-0 h-auto">
+                                ${userInput||""}
+                            </div>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <img class="mx-auto sizefixiconsmall" src="{% static 'img/user.png' %}">
+                                </span>
+                            </div>
+                        </div> `
+            )
+
+            $.ajax({
+
+                type: 'GET',
+
+                url: "{% url 'room' %}",
+
+                data: {
+                    'query': userInput
+                },
+                dataSrc: "",
+
+                success: function (response) {
+
+                    // on successfull creating object
+
+                    // 1. clear the form.
+
+                    $("#input-place").val('');
+                    $("#input-place").first().focus();
+
+                    // 2. focus to nickname input 
+
+                    // $("#id_nick_name").focus();
+
+
+                    // display the newly friend to table.
+
+                    var instance = response["instance"];
+
+                    $("#chat-container").append(
+
+                        ` <div class="input-group mb-2 bot-class">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <img class="mx-auto sizefixiconsmall" src="{% static 'img/robot.png' %}">
+                                        </span>
+                                    </div>
+                                    <div class="form-control h-auto">
+                                        ${instance||""}
+                                    </div>
+                                </div>`
+
+
+                    )
+
+                    
+
+
+                    
+                    console.log(response)
+                    var objDiv = document.getElementById("chat-container");
+                    objDiv.scrollTop = objDiv.scrollHeight;
+
+                },
+
+                error: function (response) {
+
+                    // alert the error if any error occured
+
+                    alert(response["responseJSON"]["error"]);
+
+                }
+
+            })
+
+        })
+    </script>
+    {% endblock javascript %}
+
+</body>
+
+</html>

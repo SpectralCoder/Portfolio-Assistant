@@ -1,0 +1,100 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/neumorphism.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/popup.css' %}">
+    <link type="text/css" href="{% static 'vendor/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+
+
+</head>
+
+<body data-spy="scroll">
+    <header>
+        <!-- <div id="first">This is the FIRST div</div>
+  <div id="second">This is the SECOND div</div>
+  <div id="third">This is the THIRD div</div> -->
+        <!-- <button id="toggle">Hide THIRD div</button> -->
+                
+
+        <!-- <div id="toggle" class="butloc nav-pills nav-pill-circle">
+            <a class="nav-link" aria-label="fifth navigation tab" data-toggle="tab" href="#">
+                <span class="nav-link-icon d-block"><span class="far fa-comments mr-2"></span></span>
+            </a>
+        </div> -->
+        {% include 'chat.html' %}
+
+        {% include 'landingcard.html' %}
+        {% include 'nav.html' %}
+
+    </header>
+    <main>
+        {% include 'techstacks.html' %}
+        
+
+
+
+
+    </main>
+
+    
+
+    <!-- <script>
+        const targetDiv = document.getElementById("third");
+        const btn = document.getElementById("toggle");
+        btn.onclick = function () {
+            if (targetDiv.style.display !== "block") {
+                targetDiv.style.display = "block";
+            } else {
+                targetDiv.style.display = "none";
+            }
+        };
+    </script> -->
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
+    <!--Other necessary scripts-->
+    <!-- <script src="js/jquery.nicescroll.min.js"></script> -->
+    <!-- <script src="js/jribbble.min.js"></script> -->
+    <!-- <script src="js/drifolio.js"></script> -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script>
+        new WOW().init();
+    </script>
+
+    <!-- Core -->
+    <!-- <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'vendor/popper.js/dist/umd/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor/headroom.js/dist/headroom.min.js' %}"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+
+    <!-- Neumorphism JS -->
+    <script src="{% static 'vendor/onscreen/dist/on-screen.umd.min.js' %}"></script>
+    <script src="{% static 'vendor/nouislider/distribute/nouislider.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'vendor/waypoints/lib/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'vendor/jarallax/dist/jarallax.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.counterup/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery-countdown/dist/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js' %}"></script>
+    <script src="{% static 'vendor/prismjs/prism.js' %}"></script>
+    <script src="{% static 'assets/js/neumorphism.js' %}"></script>
+    <script src="{% static 'js/animate-text.js' %}"></script>
+
+    <!-- <script>
+        function changeClass(e) {
+            e.classList.toggle('off');
+            e.classList.toggle('on');
+        }
+        document.querySelectorAll('span').forEach(span => span.addEventListener('click', function () {
+            changeClass(this);
+        }));
+    </script> -->
+
+
+</body>
